@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace Inicio
 {
@@ -10,6 +11,12 @@ namespace Inicio
     {
         public SqlConnection conexion = new SqlConnection();
         public SqlCommand comando = new SqlCommand();
+
+        public DataSet dataSet = new DataSet("Datos");
+
+        SqlDataAdapter Adaptador_de_asignaturas_alumno;
+        SqlDataAdapter Adaptador_genericas;
+        SqlDataAdapter Adaptador_tareas_alumno;
 
         public string conectar()
         {
@@ -143,26 +150,120 @@ namespace Inicio
             }
         }
 
-        public Boolean login(string email, string pass)
+        public String login(string email, string pass)
         {
-            string sql = "Select email From Usuarios where email=@param1 and pass=@param2 and confirmado ='true' ";
+            string sql = "Select * From Usuarios where email=@param1 and pass=@param2 and confirmado ='true' ";
        
-            comando = new SqlCommand(sql, conexion);
-            comando.Parameters.AddWithValue("@param1", email);
-            comando.Parameters.AddWithValue("@param2", pass);
+            SqlCommand cmd = new SqlCommand(sql, conexion);
+            cmd.Parameters.AddWithValue("@param1", email);
+            cmd.Parameters.AddWithValue("@param2", pass);
             System.Diagnostics.Debug.WriteLine("Hay conexion");
-            SqlDataReader reader = comando.ExecuteReader();
-
+            
+            SqlDataReader reader = cmd.ExecuteReader();
+            
+            
             if (reader.HasRows)
             {
+                reader.Read();
+                String x = reader.GetString(5);
                 reader.Close();
-                return true;
+                return x;
             }
             else
             {
                 reader.Close();
-                return false;
+                return "ERROR";
             }
+        }
+
+
+        public DataSet asignaturasAlumno(string email)
+        {
+            string sql = "select GruposClase.codigoasig from GruposClase, EstudiantesGrupo where EstudiantesGrupo.Grupo=GruposClase.codigo and EstudiantesGrupo.email=@param1";
+            SqlCommand cmd = new SqlCommand(sql, conexion);
+            cmd.Parameters.AddWithValue("@param1", email);
+
+            Adaptador_de_asignaturas_alumno = new SqlDataAdapter(cmd);
+            Adaptador_de_asignaturas_alumno.Fill(dataSet, "AsigAlum");
+            return dataSet;
+
+        }
+
+        public DataView genericasAlumno(string email)
+        {
+            String sql = "Select codAsig, Codigo,Descripcion,HEstimadas,TipoTarea From TareasGenericas WHERE Explotacion=1 AND Codigo NOT IN (Select CodTarea FROM EstudiantesTareas WHERE Email=@param1)";
+            SqlCommand cmd = new SqlCommand(sql, conexion);
+            cmd.Parameters.AddWithValue("@param1", email);
+            Adaptador_genericas = new SqlDataAdapter(cmd);
+
+           
+
+            Adaptador_genericas.Fill(dataSet, "tabla_tareas");
+
+            DataTable table = new DataTable();
+            table = dataSet.Tables["tabla_tareas"];
+            DataView dataview = new DataView(table);
+            return dataview;
+        }
+
+        public DataTable tareasAlumno(string email)
+        {
+            String sql = "SELECT Email, CodTarea, HEstimadas, HReales From EstudiantesTareas WHERE Email = @param1";
+            SqlCommand cmd = new SqlCommand(sql, conexion);
+            System.Diagnostics.Debug.WriteLine(email);
+            cmd.Parameters.AddWithValue("@param1", email);
+            Adaptador_tareas_alumno = new SqlDataAdapter(cmd);
+           
+            
+            Adaptador_tareas_alumno.Fill(dataSet, "tabla_tareas_alumnos");
+
+            DataTable table = new DataTable();
+            table = dataSet.Tables["tabla_tareas_alumnos"];
+            
+            return table;
+
+        }
+
+
+        public DataTable instanciar(string email, string tarea, int est, int real, DataTable tabla_actualizar)
+        {
+            String sql = "insert into EstudiantesTareas values (@param1, @param2, @param3, @param4)";
+            SqlCommand cmd = new SqlCommand(sql, conexion);
+            cmd.Parameters.AddWithValue("@param1", email);
+            cmd.Parameters.AddWithValue("@param2", tarea);
+            cmd.Parameters.AddWithValue("@param3", est);
+            cmd.Parameters.AddWithValue("@param4", real);
+
+            //Se crea un adaptador y se mete el comando de insercion
+
+            SqlDataAdapter adaptador = new SqlDataAdapter(cmd);
+            adaptador.InsertCommand = cmd;
+
+            //Crear una nueva fila en la tabla que se ha recibido(latabla de instanciar tarea)
+
+            DataRow fila_nueva = tabla_actualizar.NewRow();
+
+            fila_nueva["Email"] = email;
+            fila_nueva["CodTarea"] = tarea;
+            fila_nueva["HEstimadas"] = est;
+            fila_nueva["HReales"] = real;
+
+
+            //Añadir la nueva fila
+
+
+            tabla_actualizar.Rows.Add(fila_nueva);
+
+
+            //actualizar la tabla
+
+            adaptador.Update(tabla_actualizar);
+
+            return tabla_actualizar;
+
+
+
+
         }
     }
 }

@@ -20,9 +20,23 @@ namespace Inicio
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-           if( acceso.login(TextBox1.Text.ToString(), TextBox2.Text.ToString())){
+           if( acceso.login(TextBox1.Text.ToString(), TextBox2.Text.ToString()) != "ERROR"){
                 Label3.Text = "Login correcto";
                 Label3.Visible = true;
+                Session.Contents.Add("email", TextBox1.Text.ToString());
+                Session.Contents.Add("tipo", acceso.login(TextBox1.Text.ToString(), TextBox2.Text.ToString()));
+                Label3.Text = (String)Session.Contents["tipo"];
+                if ((String)Session.Contents["tipo"] == "Alumno")
+                {
+                    
+                    Response.Redirect("ALUMNOS/Alumnos.aspx");
+                    
+                }
+                else if ((String)Session.Contents["tipo"] == "Profesor")
+                {
+                    Response.Redirect("Profesor/Profesor.aspx");
+                }
+
             }
             else
             {

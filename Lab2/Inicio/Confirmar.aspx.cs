@@ -16,7 +16,7 @@ namespace Inicio
             String link = HttpContext.Current.Request.Url.AbsoluteUri;
             Uri uri = new Uri(link);
             string email = HttpUtility.ParseQueryString(uri.Query).Get("mbr");
-            int cod = int.Parse(HttpUtility.ParseQueryString(uri.Query).Get("numconf"));
+            int cod = int.Parse(HttpUtility.ParseQueryString(uri.Query).Get("est"));
 
             if(acceso.confirmar(email, cod))
             {
