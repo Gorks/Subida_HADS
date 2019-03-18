@@ -267,29 +267,6 @@ namespace Inicio
         }
 
 
-        public void insertar(string cod, string desc, string codasig, int est, string tipo)
-        {
-            String sql = "insert into EstudiantesTareas values (@param1, @param2, @param3, @param4, false, @param5)";
 
-            SqlCommand cmd = new SqlCommand(sql, conexion);
-            cmd.Parameters.AddWithValue("@param1", cod);
-            cmd.Parameters.AddWithValue("@param2", desc);
-            cmd.Parameters.AddWithValue("@param3", codasig);
-            cmd.Parameters.AddWithValue("@param4", est);
-            cmd.Parameters.AddWithValue("@param5", tipo);
-
-            //Se crea un adaptador y se mete el comando de insercion
-
-            SqlDataAdapter adaptador = new SqlDataAdapter(cmd);
-            adaptador.InsertCommand = cmd;
-
-            //Crear una nueva fila en la tabla que se ha recibido(latabla de instanciar tarea)
-
- 
-
-
-
-
-        }
     }
 }
