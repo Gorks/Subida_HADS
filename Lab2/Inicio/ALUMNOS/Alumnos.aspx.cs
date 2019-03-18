@@ -13,5 +13,11 @@ namespace Inicio
         {
 
         }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Response.Redirect("../Inicio.aspx");
+        }
     }
 }

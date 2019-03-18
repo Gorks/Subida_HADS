@@ -16,7 +16,13 @@ namespace Inicio
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            Response.Redirect("InsertarTarea.aspx");
+        }
 
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Response.Redirect("../Inicio.aspx");
         }
     }
 }

@@ -9,7 +9,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div style="height: 494px">
+        <div style="height: 376px">
             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:HADS18-SalaberriaConnectionString %>" SelectCommand="SELECT GruposClase.codigoasig FROM GruposClase, ProfesoresGrupo WHERE ProfesoresGrupo.email = @param1 AND GruposClase.codigo = ProfesoresGrupo.codigogrupo">
                 <SelectParameters>
                     <asp:SessionParameter Name="param1" SessionField="email" />
@@ -61,6 +61,11 @@
             <br />
             <br />
             <br />
+        </div>
+                <div>
+            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/PROFESOR/Profesor.aspx">Volver a menú</asp:HyperLink>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Button ID="Button2" runat="server" Text="Cerrar sesión" OnClick="Button2_Click" />
         </div>
     </form>
 </body>

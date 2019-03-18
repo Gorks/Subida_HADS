@@ -7,8 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
 </head>
-<body style="height: 490px">
+<body style="height: 490px; margin-bottom: 15px;">
     <form id="form1" runat="server">
+        <div>
         <div style="height: 58px">
             Instanciar Tarea Genérica<br />
             <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/ALUMNOS/TareasAlumno.aspx">Página anterior</asp:HyperLink>
@@ -47,6 +48,12 @@
                 <asp:BoundField DataField="HReales" HeaderText="HReales" />
             </Columns>
         </asp:GridView>
+    </div>
+       <div>
+            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/ALUMNOS/TareasAlumno.aspx">Volver a tareas</asp:HyperLink>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Cerrar sesión" />
+        </div>
     </form>
 </body>
 </html>

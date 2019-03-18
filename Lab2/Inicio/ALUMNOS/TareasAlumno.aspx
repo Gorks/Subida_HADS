@@ -31,6 +31,11 @@
                 </Columns>
             </asp:GridView>
         </div>
+                <div>
+            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/ALUMNOS/Alumnos.aspx">Volver a menú</asp:HyperLink>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Cerrar sesión" />
+        </div>
     </form>
 </body>
 </html>

@@ -28,6 +28,9 @@
             </div>
             
         </div>
+                <div>
+            <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Cerrar sesión" />
+        </div>
     </form>
 </body>
 </html>
