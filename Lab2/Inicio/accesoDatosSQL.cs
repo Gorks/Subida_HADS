@@ -227,27 +227,19 @@ namespace Inicio
 
         public DataTable instanciar(string email, string tarea, int est, int real, DataTable tabla_actualizar)
         {
-            String sql = "insert into EstudiantesTareas values (@param1, @param2, @param3, @param4)";
+            String sql = "Select * From EstudiantesTareas";
             SqlCommand cmd = new SqlCommand(sql, conexion);
-            cmd.Parameters.AddWithValue("@param1", email);
-            cmd.Parameters.AddWithValue("@param2", tarea);
-            cmd.Parameters.AddWithValue("@param3", est);
-            cmd.Parameters.AddWithValue("@param4", real);
-
-            //Se crea un adaptador y se mete el comando de insercion
-
+            //Se crea un adapter y un builder
             SqlDataAdapter adaptador = new SqlDataAdapter(cmd);
-            adaptador.InsertCommand = cmd;
+           
+            SqlCommandBuilder builder = new SqlCommandBuilder(adaptador);
 
             //Crear una nueva fila en la tabla que se ha recibido(latabla de instanciar tarea)
-
             DataRow fila_nueva = tabla_actualizar.NewRow();
-
             fila_nueva["Email"] = email;
             fila_nueva["CodTarea"] = tarea;
             fila_nueva["HEstimadas"] = est;
-            fila_nueva["HReales"] = real;
-
+            fila_nueva["HReales"] = real;   
 
             //Añadir la nueva fila
 
