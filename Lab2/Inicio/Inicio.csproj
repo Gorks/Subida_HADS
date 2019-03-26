@@ -58,6 +58,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App_Data\tareas.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\PublishProfiles\HADS18-Salaberria - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\HADS18-Salaberria - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
@@ -70,9 +73,16 @@
   <ItemGroup>
     <Content Include="ALUMNOS\Alumnos.aspx" />
     <Content Include="ALUMNOS\InstanciarTarea.aspx" />
+    <Content Include="App_Data\HAS.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\SEG.xml" />
+    <Content Include="App_Data\XSLTFile.xsl" />
     <Content Include="CambiarContrasena.aspx" />
     <Content Include="Confirmar.aspx" />
     <Content Include="Inicio.aspx" />
+    <Content Include="PROFESOR\Exportar.aspx" />
+    <Content Include="PROFESOR\Importar.aspx" />
     <Content Include="PROFESOR\InsertarTarea.aspx" />
     <Content Include="PROFESOR\Profesor.aspx" />
     <Content Include="Registro.aspx" />
@@ -117,6 +127,20 @@
     </Compile>
     <Compile Include="Inicio.aspx.designer.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PROFESOR\Exportar.aspx.cs">
+      <DependentUpon>Exportar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PROFESOR\Exportar.aspx.designer.cs">
+      <DependentUpon>Exportar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PROFESOR\Importar.aspx.cs">
+      <DependentUpon>Importar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PROFESOR\Importar.aspx.designer.cs">
+      <DependentUpon>Importar.aspx</DependentUpon>
     </Compile>
     <Compile Include="PROFESOR\InsertarTarea.aspx.cs">
       <DependentUpon>InsertarTarea.aspx</DependentUpon>

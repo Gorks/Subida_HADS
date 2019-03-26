@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.Data;
+using System.Xml;
 
 namespace Inicio
 {
@@ -257,8 +258,81 @@ namespace Inicio
 
 
         }
+        public void importarXML(XmlDocument documento, string asig)
+        {
+            String sql = "Select * From TareasGenericas";
+            
+            SqlCommand cmd = new SqlCommand(sql, conexion);
+            //Se crea un adapter y un builder
+            SqlDataAdapter adaptador = new SqlDataAdapter(cmd);
+            SqlCommandBuilder builder = new SqlCommandBuilder(adaptador);
+            //Crear un datatable 
 
+            DataTable tabla = new DataTable("tabla_tareas");
+            //llenar el dataset
+
+            adaptador.Fill(dataSet, "tabla_tareas");
+
+            //pasar del dataset a la tabla para poder actualizar la bd.
+            tabla = dataSet.Tables["tabla_tareas"];
+
+            //Coger la lista de nodos del xml con GetElements byTagName: Devuelve la lista de nodos (XmlNodeList)que corresponden con la etiqueta indicada
+            XmlNodeList tareas_insertar = documento.GetElementsByTagName("tarea");            for(int x = 0; x<tareas_insertar.Count; x++)
+            {
+                //Crear una nueva fila en la tabla
+                DataRow fila_nueva = tabla.NewRow();
+                fila_nueva["Codigo"] = tareas_insertar[x].Attributes["codigo"].Value;
+                fila_nueva["Descripcion"] = tareas_insertar[x].ChildNodes[0].InnerText;
+                fila_nueva["CodAsig"] = asig;
+                fila_nueva["HEstimadas"] = tareas_insertar[x].ChildNodes[1].InnerText;
+                fila_nueva["Explotacion"] = tareas_insertar[x].ChildNodes[2].InnerText;
+                fila_nueva["TipoTarea"] = tareas_insertar[x].ChildNodes[3].InnerText;
+
+                //Añadir la nueva fila
+
+
+                tabla.Rows.Add(fila_nueva);
+
+                
+
+            }
+
+            //actualizar la tabla
+
+            //adaptador.Update(tabla);
+
+            try
+            {
+                adaptador.Update(tabla);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+        }
+
+        public DataSet tareas_asignatura(string codasig)
+        {
+            string sql = "Select Codigo, Descripcion, HEstimadas, Explotacion, TipoTarea FROM TareasGenericas Where CodAsig = @param1 ";
+            SqlCommand cmd = new SqlCommand(sql, conexion);
+            cmd.Parameters.AddWithValue("@param1", codasig);
+           SqlDataAdapter Adaptador = new SqlDataAdapter(cmd);
+
+            DataSet tareas = new DataSet("tareas");
+
+            Adaptador.Fill(tareas, "tarea");
+
+            return tareas;
+            /**DataTable table = new DataTable();
+            table = tareas.Tables["tarea"];
+            
+            return table;*/
+
+        }
 
 
     }
+
+
 }

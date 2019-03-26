@@ -10,8 +10,14 @@
 <body>
     <form id="form1" runat="server">
         <div style="height: 475px">
-            <div style="width: 296px; height: 125px;">
+            <div style="width: 296px; height: 152px;">
                 <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="TareasProfesor.aspx">Tareas</asp:HyperLink>
+                <br />
+                <br />
+                <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/PROFESOR/Importar.aspx">Importar</asp:HyperLink>
+                <br />
+                <br />
+                <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/PROFESOR/Exportar.aspx">Exportar</asp:HyperLink>
                 <br />
                 <br />
             </div>
