@@ -57,7 +57,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;
         <div style="width: 124px; margin-left: 160px">
             <asp:RadioButtonList ID="RadioButtonList1" runat="server">
-                <asp:ListItem Selected="True">Estudiante</asp:ListItem>
+                <asp:ListItem Selected="True">Alumno</asp:ListItem>
                 <asp:ListItem>Profesor</asp:ListItem>
             </asp:RadioButtonList>
         </div>

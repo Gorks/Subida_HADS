@@ -42,7 +42,8 @@ namespace Inicio
 
                     /* Enviar */
                     Cr.MandarCorreo(mnsj);
-
+                    Label5.Text = "Se le ha enviado un mail con su codigo para cambiar";
+                    Label5.Visible = true;
                     segunda_parte.Visible = true;
                     Button1.Enabled = false;
                     TextBox1.Enabled = false;

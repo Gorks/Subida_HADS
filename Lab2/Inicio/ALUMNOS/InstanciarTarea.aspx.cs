@@ -47,6 +47,7 @@ namespace Inicio.ALUMNOS
         protected void Button2_Click(object sender, EventArgs e)
         {
             Session.Abandon();
+            System.Web.Security.FormsAuthentication.SignOut();
             Response.Redirect("../Inicio.aspx");
         }
     }

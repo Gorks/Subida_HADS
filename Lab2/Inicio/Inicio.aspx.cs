@@ -12,7 +12,7 @@ namespace Inicio
         public accesoDatosSQL acceso = new accesoDatosSQL();
         protected void Page_Load(object sender, EventArgs e)
         {
-          
+
             string resultado = acceso.conectar();
             Label2.Text = resultado;
 
@@ -28,13 +28,28 @@ namespace Inicio
                 Label3.Text = (String)Session.Contents["tipo"];
                 if ((String)Session.Contents["tipo"] == "Alumno")
                 {
-                    
+                    System.Web.Security.FormsAuthentication.SetAuthCookie("alumno", false);
                     Response.Redirect("ALUMNOS/Alumnos.aspx");
                     
                 }
-                else if ((String)Session.Contents["tipo"] == "Profesor")
+                else if ((String)Session.Contents["tipo"] == "Profesor") 
+
                 {
+                    if(TextBox1.Text.ToString() == "vadillo@ehu.es")
+                    {
+                        System.Web.Security.FormsAuthentication.SetAuthCookie("especial", false);
+                    }
+                    else
+                    {
+                        System.Web.Security.FormsAuthentication.SetAuthCookie("profesor", false);
+                    }
                     Response.Redirect("Profesor/Profesor.aspx");
+                }
+
+                else if ((String)Session.Contents["tipo"] == "Admin")
+                {
+                    System.Web.Security.FormsAuthentication.SetAuthCookie("admin", false);
+                    Response.Redirect("ADMIN/Admin.aspx");
                 }
 
             }

@@ -71,6 +71,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ADMIN\Admin.aspx" />
     <Content Include="ALUMNOS\Alumnos.aspx" />
     <Content Include="ALUMNOS\InstanciarTarea.aspx" />
     <Content Include="App_Data\HAS.xml">
@@ -88,9 +89,18 @@
     <Content Include="Registro.aspx" />
     <Content Include="ALUMNOS\TareasAlumno.aspx" />
     <Content Include="PROFESOR\TareasProfesor.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ADMIN\Admin.aspx.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ADMIN\Admin.aspx.designer.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ALUMNOS\Alumnos.aspx.cs">
       <DependentUpon>Alumnos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

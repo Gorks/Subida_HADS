@@ -5,6 +5,8 @@ using System.Web;
 using System.Data.SqlClient;
 using System.Data;
 using System.Xml;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Inicio
 {
@@ -39,7 +41,8 @@ namespace Inicio
         }
 
         public Boolean registrar(string email, string nombre, string apellido, int numconfir, string tipo, string pass) {
-            
+
+            String pass_cifrado;
             Boolean confirmado = false;
             int codpass = 0;
             string sql2 = "Select email From Usuarios where email=@param1";
@@ -50,6 +53,16 @@ namespace Inicio
             if (!reader.HasRows)
             {
                 reader.Close();
+                //para encriptar obtenido en internet
+                MD5 md5 = MD5CryptoServiceProvider.Create();
+                ASCIIEncoding encoding = new ASCIIEncoding();
+                byte[] stream = null;
+                StringBuilder sb = new StringBuilder();
+                stream = md5.ComputeHash(encoding.GetBytes(pass));
+                for (int i = 0; i < stream.Length; i++) sb.AppendFormat("{0:x2}", stream[i]);
+                pass_cifrado= sb.ToString();
+
+
                 comando = new SqlCommand(sql, conexion);
                 comando.Parameters.AddWithValue("@param1", email);
                 comando.Parameters.AddWithValue("@param2", nombre);
@@ -57,7 +70,7 @@ namespace Inicio
                 comando.Parameters.AddWithValue("@param4", numconfir);
                 comando.Parameters.AddWithValue("@param5", confirmado);
                 comando.Parameters.AddWithValue("@param6", tipo);
-                comando.Parameters.AddWithValue("@param7", pass);
+                comando.Parameters.AddWithValue("@param7", pass_cifrado);
                 comando.Parameters.AddWithValue("@param8", codpass);
                 System.Diagnostics.Debug.WriteLine(comando.Parameters[1]);
                 comando.ExecuteNonQuery();
@@ -130,6 +143,16 @@ namespace Inicio
             string sql = "Select email From Usuarios where email=@param1 and codpass=@param2";
             string sql2 = "UPDATE USUARIOS SET pass = @param2 where email=@param1";
             comando = new SqlCommand(sql, conexion);
+            String pass_cifrado;
+            MD5 md5 = MD5CryptoServiceProvider.Create();
+            ASCIIEncoding encoding = new ASCIIEncoding();
+            byte[] stream = null;
+            StringBuilder sb = new StringBuilder();
+            stream = md5.ComputeHash(encoding.GetBytes(pass));
+
+            for (int i = 0; i < stream.Length; i++) sb.AppendFormat("{0:x2}", stream[i]);
+            pass_cifrado = sb.ToString();
+
             comando.Parameters.AddWithValue("@param1", email);
             comando.Parameters.AddWithValue("@param2", codpass);
             System.Diagnostics.Debug.WriteLine("Hay conexion");
@@ -140,7 +163,7 @@ namespace Inicio
                 reader.Close();
                 comando = new SqlCommand(sql2, conexion);
                 comando.Parameters.AddWithValue("@param1", email);
-                comando.Parameters.AddWithValue("@param2", pass);
+                comando.Parameters.AddWithValue("@param2", pass_cifrado);
                 comando.ExecuteNonQuery();
                 return true;
             }
@@ -153,11 +176,22 @@ namespace Inicio
 
         public String login(string email, string pass)
         {
+            String pass_cifrado;
+
+            //para encriptar obtenido en internet
+            MD5 md5 = MD5CryptoServiceProvider.Create();
+            ASCIIEncoding encoding = new ASCIIEncoding();
+            byte[] stream = null;
+            StringBuilder sb = new StringBuilder();
+            stream = md5.ComputeHash(encoding.GetBytes(pass));
+            for (int i = 0; i < stream.Length; i++) sb.AppendFormat("{0:x2}", stream[i]);
+            pass_cifrado = sb.ToString();
+
             string sql = "Select * From Usuarios where email=@param1 and pass=@param2 and confirmado ='true' ";
-       
+            
             SqlCommand cmd = new SqlCommand(sql, conexion);
             cmd.Parameters.AddWithValue("@param1", email);
-            cmd.Parameters.AddWithValue("@param2", pass);
+            cmd.Parameters.AddWithValue("@param2", pass_cifrado);
             System.Diagnostics.Debug.WriteLine("Hay conexion");
             
             SqlDataReader reader = cmd.ExecuteReader();
