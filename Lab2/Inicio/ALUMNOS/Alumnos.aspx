@@ -28,8 +28,43 @@
             </div>
             
         </div>
-                <div>
+                            <asp:ScriptManager ID="ScriptManager1" runat="server">
+                    </asp:ScriptManager>
+                <div style="height: 156px">
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
+                            <asp:Label ID="Label2" runat="server" Text="Usuarios Logueados:"></asp:Label>
+                            <asp:Label ID="Label3" runat="server" Text="Profesores"></asp:Label>
+                            &nbsp;&nbsp;
+                            <asp:Label ID="LabelProfesores" runat="server" Text="Label"></asp:Label>
+                            &nbsp;&nbsp;
+                            <asp:Label ID="Label4" runat="server" Text="Alumnos"></asp:Label>
+                            &nbsp;&nbsp;
+                            <asp:Label ID="LabelAlumnos" runat="server" Text="Label"></asp:Label>
+                            <br />
+                            <asp:ListBox ID="ListBoxProfesores" runat="server"></asp:ListBox>
+                            <asp:ListBox ID="ListBoxAlumnos" runat="server"></asp:ListBox>
+                            <br />
+                            <asp:Timer ID="Timer1" runat="server" Interval="2000" OnTick="Timer1_Tick">
+                            </asp:Timer>
+                            <br />
+                            <br />
+                            <br />
+                        </ContentTemplate>
+
+                    </asp:UpdatePanel>
+
+&nbsp;&nbsp;
+            &nbsp;
+            &nbsp;&nbsp;
+            &nbsp;&nbsp;
+            <br />
+&nbsp;
+                <div style="width: 895px">
             <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Cerrar sesión" />
+                    <br />
+        </div>
+
         </div>
     </form>
 </body>

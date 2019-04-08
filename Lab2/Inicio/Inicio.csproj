@@ -81,6 +81,7 @@
     <Content Include="App_Data\XSLTFile.xsl" />
     <Content Include="CambiarContrasena.aspx" />
     <Content Include="Confirmar.aspx" />
+    <Content Include="Global.asax" />
     <Content Include="Inicio.aspx" />
     <Content Include="PROFESOR\Exportar.aspx" />
     <Content Include="PROFESOR\Importar.aspx" />
@@ -130,6 +131,9 @@
     </Compile>
     <Compile Include="Confirmar.aspx.designer.cs">
       <DependentUpon>Confirmar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Inicio.aspx.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
