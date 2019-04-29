@@ -30,40 +30,55 @@ namespace Inicio
                 Random rnd = new Random();
                 int cod = rnd.Next(1, 999999999);
                 System.Diagnostics.Debug.WriteLine("HA ENTRADO click");
-                
-                if(acceso.registrar(TextBox1.Text.ToString(), TextBox2.Text.ToString(), TextBox3.Text.ToString(), cod, RadioButtonList1.SelectedValue.ToString(), TextBox4.Text.ToString()))
+
+                WebService.Matriculas m = new WebService.Matriculas();
+                string respuesta = m.comprobar(TextBox1.Text);
+
+                if(respuesta == "SI")
                 {
-                    mnsj.Subject = "Confirmar cuenta";
 
-                    mnsj.To.Add(new MailAddress(TextBox1.Text.ToString()));
+                    if(acceso.registrar(TextBox1.Text.ToString(), TextBox2.Text.ToString(), TextBox3.Text.ToString(), cod, RadioButtonList1.SelectedValue.ToString(), TextBox4.Text.ToString()))
+                    {
+                        mnsj.Subject = "Confirmar cuenta";
 
-                    mnsj.From = new MailAddress("YO@MiDominio.com", "Proyecto Hads");
+                        mnsj.To.Add(new MailAddress(TextBox1.Text.ToString()));
 
-                    string url = "http://" + HttpContext.Current.Request.Url.Authority + "/";
+                        mnsj.From = new MailAddress("YO@MiDominio.com", "Proyecto Hads");
+
+                        string url = "http://" + HttpContext.Current.Request.Url.Authority + "/";
 
 
-                    mnsj.Body = "  Confirme su registro " + url + "Confirmar.aspx?mbr=" + TextBox1.Text.ToString() + "&numconf=" + cod.ToString();
+                        mnsj.Body = "  Confirme su registro " + url + "Confirmar.aspx?mbr=" + TextBox1.Text.ToString() + "&numconf=" + cod.ToString();
 
-                    /* Enviar */
-                    Cr.MandarCorreo(mnsj);
+                        /* Enviar */
+                        Cr.MandarCorreo(mnsj);
 
-                    Label6.Text = "Confirme su cuenta, se le ha enviado un correo";
-                    Label6.Visible = true;
-                    Button1.Enabled = false;
+                        Label6.Text = "Confirme su cuenta, se le ha enviado un correo";
+                        Label6.Visible = true;
+                        Button1.Enabled = false;
+                    }
+
+                    else
+                    {
+                        Label6.Text = "El correo ya está registrado";
+                        Label6.Visible = true;
+                    }
                 }
 
                 else
                 {
-                    Label6.Text = "El correo ya está registrado";
+                    Label6.Text = "No es correo VIP";
                     Label6.Visible = true;
                 }
+                
                 
 
 
             }
             catch (Exception ex)
             {
-                
+                Label6.Text = ex.ToString();
+                Label6.Visible = true;
             }
         }
         protected void Page_Unload(object sender, EventArgs e)

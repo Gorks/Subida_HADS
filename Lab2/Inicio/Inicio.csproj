@@ -40,6 +40,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -61,8 +63,46 @@
     <None Include="App_Data\tareas.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\Service\TiempoMedio.wsdl" />
+    <None Include="Connected Services\TiempoMedio\TiempoMedio.wsdl" />
     <None Include="Properties\PublishProfiles\HADS18-Salaberria - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\HADS18-Salaberria - Web Deploy.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\Service\TiempoMedio.disco" />
+    <None Include="Connected Services\Service\configuration91.svcinfo" />
+    <None Include="Connected Services\Service\configuration.svcinfo" />
+    <None Include="Connected Services\Service\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\TiempoMedio\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\TiempoMedio\TiempoMedio.wsdl" />
+    <Content Include="Web References\tmedio\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <None Include="Web References\tmedio\TiempoMedio.wsdl" />
+    <None Include="Web References\WebService\comprobarmatricula.wsdl" />
+    <None Include="Connected Services\TiempoMedio\TiempoMedio.disco" />
+    <None Include="Connected Services\TiempoMedio\configuration91.svcinfo" />
+    <None Include="Connected Services\TiempoMedio\configuration.svcinfo" />
+    <None Include="Connected Services\TiempoMedio\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="COORDINADOR\Coordinador.aspx" />
+    <None Include="Web References\TiempoMedio\TiempoMedio.disco" />
+    <None Include="Web References\tmedio\TiempoMedio.disco" />
+    <Content Include="Web References\WebService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -124,6 +164,23 @@
       <DependentUpon>CambiarContrasena.aspx</DependentUpon>
     </Compile>
     <Compile Include="accesoDatosSQL.cs" />
+    <Compile Include="Connected Services\Service\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\TiempoMedio\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="COORDINADOR\Coordinador.aspx.cs">
+      <DependentUpon>Coordinador.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="COORDINADOR\Coordinador.aspx.designer.cs">
+      <DependentUpon>Coordinador.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Correos.cs" />
     <Compile Include="Confirmar.aspx.cs">
       <DependentUpon>Confirmar.aspx</DependentUpon>
@@ -171,6 +228,11 @@
       <DependentUpon>Profesor.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Registro.aspx.cs">
       <DependentUpon>Registro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -192,6 +254,66 @@
     <Compile Include="PROFESOR\TareasProfesor.aspx.designer.cs">
       <DependentUpon>TareasProfesor.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Web References\TiempoMedio\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\tmedio\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\WebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://ehusw.es/jav/ServiciosWeb/comprobarmatricula.php%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WebService\</RelPath>
+      <UpdateFromURL>http://ehusw.es/jav/ServiciosWeb/comprobarmatricula.php%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Inicio_Matriculas_Matriculas</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:56152/TiempoMedio.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\TiempoMedio\</RelPath>
+      <UpdateFromURL>http://localhost:56152/TiempoMedio.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Inicio_TiempoMedio_TiempoMedio</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://serviciowebtiempomedio.azurewebsites.net/TiempoMedio.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\tmedio\</RelPath>
+      <UpdateFromURL>https://serviciowebtiempomedio.azurewebsites.net/TiempoMedio.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Inicio_tmedio_TiempoMedio</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\Service\" />
+    <WCFMetadataStorage Include="Connected Services\TiempoMedio\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -20,7 +20,7 @@
                 <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/PROFESOR/Exportar.aspx">Exportar</asp:HyperLink>
                 <br />
                 <br />
-                <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/COORDINADOR/Coordinador.aspx">Coordinador</asp:HyperLink>
                 <br />
             </div>
             <div style="border: thin solid #000000; height: 77px; margin-left: 365px; background-color: #FFFF00;">

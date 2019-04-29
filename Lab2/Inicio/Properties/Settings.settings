@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Inicio.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Inicio_Matriculas_Matriculas" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://ehusw.es/jav/ServiciosWeb/comprobarmatricula.php</Value>
+    </Setting>
+    <Setting Name="Inicio_TiempoMedio_TiempoMedio" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:56152/TiempoMedio.asmx</Value>
+    </Setting>
+    <Setting Name="Inicio_tmedio_TiempoMedio" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://serviciowebtiempomedio.azurewebsites.net/TiempoMedio.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
